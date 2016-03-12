@@ -1,5 +1,11 @@
 npm run start - configured in in package.json >scripts
 
+When to use Stateless functional components over ES6 classes (React.createClass or React.Component)
+
+If your component needs access to this, or your component needs lifecycle methods, use a ES6 class
+Else, you can get away with a stateless functional component
+http://jamesknelson.com/should-i-use-react-createclass-es6-classes-or-stateless-functional-components/
+
 prop types
 strongly type the props going to a component (string,func,bool,int) this acts as a testing and documentation step and increases readability
 
@@ -110,5 +116,37 @@ Whickh objects should be focal when invoking a function
   
 look where the function invoked, not when it was defined
 
+AXIOS
+
+axios.get(something) establishes a promise
+axois.all([promises]) takes an array of promises and fires the .then function once they are complete
+
+axios.all([promises]).then(function(info){do stuff})
+axios.all returns a promise if you keep returning stuff from it
+
+when navigating to a new route, you can assign the state object in the "this.context.router.push" to keep the fetched data present in the new route
+
+Great map reduce example
+
+var votes = [
+  'tacos',
+  'pizza',
+  'pizza',
+  'tacos',
+  'fries',
+  'ice cream',
+  'ice cream',
+  'pizza'
+]
+var initialValue = {}
+var reducer = function(tally, vote) {
+  if (!tally[vote]) {
+    tally[vote] = 1;
+  } else {
+    tally[vote] = tally[vote] + 1;
+  }
+  return tally;
+}
+var result = votes.reduce(reducer, initialValue) // {tacos: 2, pizza: 3, fries: 1, ice cream: 2}
 
 
