@@ -5,7 +5,8 @@ var param = "?client_id="+id+"&client_secret="+sec;
 
 
 function getUserInfo(username){
-	return axios.get('https://api.github.com/users/'+username+param);
+	//can add param here if you get a api key
+	return axios.get('https://api.github.com/users/'+username);
 }
 
 var helpers = {

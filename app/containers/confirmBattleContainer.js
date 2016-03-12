@@ -8,19 +8,19 @@ var ConfirmBattleContainer = React.createClass({
 	},
 	//Setting the component initial state
 	getInitialState: function(){
-		console.log("In Battle: get initial state")
+		//console.log("In Battle: get initial state")
 		return {
 			isLoading: true,
-			playerInfo:[]
+			playersInfo:[]
 		}
 	},
 	//Preparing the component for mounting
 	componentWillMount: function(){
-		console.log("In Battle: component will mount");
+		//console.log("In Battle: component will mount");
 	},
 	//Lifecycle event when the component loaded, good for event listeners and ajax calls
 	componentDidMount: function(){
-		console.log("In Battle: component did mount");
+		//console.log("In Battle: component did mount");
 		var query = this.props.location.query;
 		//Scoping issues for "this"
 		// var that = this;
@@ -35,18 +35,28 @@ var ConfirmBattleContainer = React.createClass({
 	},
 	//Fired when the component recieves new props
 	componentWillReceiveProps: function(){
-		console.log("In Battle: component will recieve props");
+		//console.log("In Battle: component will recieve props");
 
+	},
+	handleInitiateBattle: function(){
+		this.context.router.push({
+			pathname: '/results',
+			//Keep the players info in the state when we push to the new route
+			state:{
+				playersInfo: this.state.playersInfo
+			}
+		})
 	},
 	//Fired when you navigate away or remove the component
 	componentWillUnmount: function(){
-		console.log("In Battle: component will unmount");
+		//console.log("In Battle: component will unmount");
 	},
 	//Renders the component
 	render: function(){
-		console.log("In Battle: rendering");
+		//console.log("In Battle: rendering");
 		return(<ConfirmBattle 
 			isLoading={this.state.isLoading}
+			onInitateBattle={this.handleInitiateBattle}
 			playersInfo = {this.state.playersInfo} />);
 	}
 
