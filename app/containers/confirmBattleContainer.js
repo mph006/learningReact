@@ -1,5 +1,6 @@
 var React = require('react');
 var ConfirmBattle = require('../components/ConfirmBattle');
+var githubHelpers = require('../utils/githubHelpers');
 
 var ConfirmBattleContainer = React.createClass({
 	contextTypes:{
@@ -21,17 +22,26 @@ var ConfirmBattleContainer = React.createClass({
 	componentDidMount: function(){
 		console.log("In Battle: component did mount");
 		var query = this.props.location.query;
-		//Fetch info then update state at a later date
+		//Scoping issues for "this"
+		// var that = this;
+		githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
+			.then(function(players){
+				this.setState({
+					isLoading:false,
+					playersInfo:[players[0],players[1]]
+				})
+				//This will fix the scoping issues, but variable assignment will work too
+			}.bind(this));
 	},
 	//Fired when the component recieves new props
-	componentWillRecieveProps: function(){
+	componentWillReceiveProps: function(){
 		console.log("In Battle: component will recieve props");
 
 	},
 	//Fired when you navigate away or remove the component
 	componentWillUnmount: function(){
 		console.log("In Battle: component will unmount");
-	}
+	},
 	//Renders the component
 	render: function(){
 		console.log("In Battle: rendering");

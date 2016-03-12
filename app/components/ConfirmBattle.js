@@ -1,8 +1,12 @@
 var React = require('react');
 
+function dumpInfo(obj){
+	return <pre>{JSON.stringify(obj,null,' ')}</pre>
+}
+
 function ConfirmBattle (props){
 	return (
-		props.isLoading===true? <p> LOADING </p> : <p>CONFIRM BATTLE</p>
+		props.isLoading===true? <p> LOADING </p> : <div>CONFIRM BATTLE: {dumpInfo(props)}</div>
 	);
 }
 

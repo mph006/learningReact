@@ -1,0 +1,114 @@
+npm run start - configured in in package.json >scripts
+
+prop types
+strongly type the props going to a component (string,func,bool,int) this acts as a testing and documentation step and increases readability
+
+context types
+Manually thread through a the defined prop. This is generally used to pass the router object to the react class, such that functions within the container know that this.context.router is and can communicate the new/different app routes
+
+Lifecycle events
+Defined in a components container
+
+getInitialState - setting components initial state
+componentWillMount - preparing the component for mounting
+componenetDidMount - event when the component mounted, assign event listeners and do ajax calls here
+componenetWillRecieveProps - fired when the component recieves new props, may want to rerender here
+componentWillUnmount - fired when someone navigates away from the page, or the component gets removed
+
+The "this" keyword
+
+"this" lets us to reuse functions with different context
+Whickh objects should be focal when invoking a function
+
+-Implicit binding (left of the dot at call time)
+  
+  var me={
+  	name:"matt"
+  	sayName: function(){
+  		console.log(this.name);
+  	}
+  };
+
+  var you = {
+  	name: "foobar"
+  }
+=======
+  me.sayName();//matt
+
+  var sayNameMixin = function(obj){
+  obj.sayName = function(){
+  		console.log(this.name);
+  	}
+  }
+
+  sayNameMixin(me);
+  sayNameMixin(you);
+  me.sayName();//matt
+  you.sayName();//foobar
+=======
+  var Person = function(name){
+  	return{
+  		name:name,
+  		sayName: function(){
+  			console.log(this.name);
+  		},
+  		mother:{
+  			name:"jane",
+  			sayName: function(){
+  				console.log(this.name);
+  			}
+  		}
+  	}
+  }
+
+  var jim = Person("jim");
+  jim.sayName();//jim
+  jim.mother.sayName();//jane
+
+
+-Explicit binding
+  var sayName = function(lang1,lang2){
+  	console.log(this.name+lang1+lang2);
+  }  
+
+  var matt ={
+  	name:"matt"
+  }
+
+  var languages =["r","js","python"]
+
+  sayName.call(matt,languages[0],languages[1]);//mattrjs
+  sayName.apply(matt,languages)//mattrjs
+  var newFunction = sayName.bind(matt,languages[0]);
+  newFunction();//mattr
+
+-new binding
+  var Animal = function(color,name){
+  	//this = {} 
+  	//when a function is invoked with the new keyword, "this" is bound to 
+  	//the new object being constructed
+  	this.color = color;
+  	this.name= name;
+  };
+
+  var zebra = new Animal("black and white","zed");
+
+-window binding
+  var sayName = function(){
+  	// 'use strict'; here will throw error when binding to the window object
+  	//You dont want to be messing with the window object
+  	console.log(this.name)
+  }
+
+  var me = {
+  	name:"matt"
+  }
+
+  sayName();//undefined this is the window object
+  window.name = "matt"
+  sayName();//matt (this is bad pratice)
+  
+look where the function invoked, not when it was defined
+
+
+
