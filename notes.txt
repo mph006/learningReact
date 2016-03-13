@@ -153,4 +153,10 @@ var result = votes.reduce(reducer, initialValue) // {tacos: 2, pizza: 3, fries: 
 
 getDefaultProps allows you to default properties of a component if a developer dosent want to pass props when the component is invoked
 
+There are times when youll need to clone a React element and attach new props to it
+React.cloneElement(ResultsWrapper, {stuff:['foo','bar']})
 
+React addons css transition group helps us animate between routes
+CSS style loader helps us dunamically load css for specific components
+
+You can require css files in modules (as if it were js) by configuring webpack's module loaders
