@@ -151,4 +151,6 @@ var reducer = function(tally, vote) {
 }
 var result = votes.reduce(reducer, initialValue) // {tacos: 2, pizza: 3, fries: 1, ice cream: 2}
 
+getDefaultProps allows you to default properties of a component if a developer dosent want to pass props when the component is invoked
+
 
