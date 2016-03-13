@@ -6,6 +6,8 @@ If your component needs access to this, or your component needs lifecycle method
 Else, you can get away with a stateless functional component
 http://jamesknelson.com/should-i-use-react-createclass-es6-classes-or-stateless-functional-components/
 
+By removing the this keyword from stateless functional components, weve removed the one way in which or function can be called in a way were not expecting
+
 prop types
 strongly type the props going to a component (string,func,bool,int) this acts as a testing and documentation step and increases readability
 
